@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Snippets</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= link_to "Home", snippets_path %>
+|
+<%= link_to "Create snippet", new_snippet_path %>
+<br>
+<h1>Code Snippets</h1>
+<div align="right">
+  <% if user_signed_in? %>
+    Hello, <%= current_user.first_name %>!
+    |
+    <%= link_to "Log out", sessions_path, method: :delete %>
+  <% else %>
+    <%= link_to "Log in", new_session_path %>
+    |
+    <%= link_to "Sign up", new_user_path %>
+  <% end %>
+</div>
+<hr>
+
+<%= notice || alert %>
+
+<%= yield %>
+
+</body>
+</html>

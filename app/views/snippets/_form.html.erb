@@ -1,0 +1,27 @@
+<% if @snippet.errors.any? %>
+  <ul>
+    <% @snippet.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @snippet do |f|%>
+  <div>
+    <%= f.label :kind %>
+    <%= f.collection_select :category_id, Category.order(:id), :id, :kind %>
+  </div>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :work %>
+    <%= f.text_area :work %>
+  </div>
+  <div>
+    <%= f.label :private %>
+    <%= f.check_box :private %>
+  </div>
+  <%= f.submit %>
+<% end %>

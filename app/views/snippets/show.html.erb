@@ -1,0 +1,31 @@
+<div>
+  <h2>(<em><%= @snippet.category.kind %></em>)</h2>
+</div>
+<div>
+  <% if @snippet.private %>
+    <h3><strong>---Private---</strong></h3>
+  <% else %>
+    <h3><strong>---Public---</strong></h3>
+  <% end %>
+</div>
+<div>
+  <h2>Title:</h2>
+  <%= @snippet.title %>
+</div>
+<br>
+<div>
+  <h2>Work:</h2>
+  <%= markdown(@snippet.work) %>
+  <%#= markdown("```" + @snippet.category.kind.downcase + "\n" + @snippet.work + "\n" + "```") %>
+</div>
+<br>
+
+<% if can? :update, @snippet %>
+  <%= link_to "Edit", edit_snippet_path(@snippet) %>
+<% end %>
+
+<% if can? :destroy, @snippet %>
+  <%= link_to "Delete", snippet_path(@snippet),
+                        method: :delete,
+                        data: {confirm: "Are you sure?"} %>
+<% end %>

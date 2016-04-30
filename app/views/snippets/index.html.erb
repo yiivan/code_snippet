@@ -1,0 +1,24 @@
+<% @categories.each do |categ| %>
+  <% @count = 0 %>
+  <% categ.snippets.order(:id).each do |snip| %>
+    <% if can? :private, snip  %>
+      <% @count += 1 %>
+    <% end %>
+  <% end %>
+  <h3><%= "#{categ.kind} (#{@count} Snippets)" %></h3>
+
+  <ul>
+    <% categ.snippets.order(:id).each do |snip| %>
+      <% if snip.private %>
+        <% @priv = "(private)" %>
+      <% else %>
+        <% @priv = "" %>
+      <% end %>
+
+      <% if can? :private, snip  %>
+        <li><%= link_to "#{snip.title} #{@priv}", snippet_path(snip) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <br>
+<% end %>
